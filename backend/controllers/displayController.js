@@ -1,4 +1,4 @@
-const Display = require("../model/displayModel");
+const Display = require("../models/displayModel");
 
 
 //create a display

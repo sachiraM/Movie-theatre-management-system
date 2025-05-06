@@ -1,4 +1,4 @@
-const Screen = require("../model/screenModel");
+const Screen = require("../models/screenModel");
 
 
 //create a screen

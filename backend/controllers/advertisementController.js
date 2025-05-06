@@ -1,4 +1,4 @@
-const Advertisement = require("../model/advertisementModel");
+const Advertisement = require("../models/advertisementModel");
 
 
 //create a advertisement
