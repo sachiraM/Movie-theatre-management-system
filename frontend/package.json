@@ -5,6 +5,7 @@
   "proxy": "http://localhost:3013",
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
+    "@fullcalendar/core": "^6.1.17",
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/react": "^6.1.9",
     "@stripe/stripe-js": "^2.1.6",
@@ -20,6 +21,7 @@
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.7.0",
+    "pdfjs-dist": "^2.16.105",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-credit-card-input": "^1.1.5",
@@ -43,7 +45,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
