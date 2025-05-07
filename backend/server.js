@@ -21,7 +21,7 @@ const advertisementRoutes = require("./routes/advertisementRoute");
 const screenRoutes = require("./routes/screenRoute");
 
 const app = express();
-const PORT = 3000;
+const PORT = 3013;
 
 // Middleware to parse JSON
 app.use(express.json());
