@@ -2,8 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'; //there is no client thing in video resource
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
 import {Provider} from 'react-redux';
 import store from './redux/store';
 
@@ -16,4 +14,3 @@ root.render(
       </React.StrictMode>
     </Provider>,
   );
-  reportWebVitals();
