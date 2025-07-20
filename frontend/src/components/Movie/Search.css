@@ -7,10 +7,19 @@
 .input-container {
 }
 
+.se {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
 .input1[type="text"] {
   padding: 10px;
-  width: 300px;
+  width: 180px;
   font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 button {
@@ -19,6 +28,7 @@ button {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -31,4 +41,39 @@ ul {
   padding: 5px;
   background-color: #f0f0f0;
   cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .se {
+    width: 100%;
+    justify-content: center;
+    margin: 8px 0;
+  }
+  .input1[type="text"] {
+    width: 120px;
+    font-size: 14px;
+  }
+  .button1 {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .se {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+  }
+  .input1[type="text"] {
+    width: 100%;
+    min-width: 80px;
+    font-size: 13px;
+  }
+  .button1 {
+    width: 100%;
+    font-size: 13px;
+    padding: 7px 0;
+  }
 }
