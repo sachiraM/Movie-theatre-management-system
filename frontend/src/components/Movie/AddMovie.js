@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function AddMovie() {
   const [title, setTitle] = useState("");
   const [genre, setGenre] = useState("");
-  const [director, setDirector] = useState("");
+  const [poster, setPoster] = useState("");
   const [releaseDate, setReleaseDate] = useState("");
   const [languages, setLanguages] = useState("");
   const [runtime, setRuntime] = useState("");
@@ -24,7 +24,7 @@ export default function AddMovie() {
     if (
       !isNotEmpty(title) ||
       !isNotEmpty(genre) ||
-      !isNotEmpty(director) ||
+      !isNotEmpty(poster) ||
       !isNotEmpty(releaseDate) ||
       !isNotEmpty(languages) ||
       !isNotEmpty(runtime) ||
@@ -34,9 +34,7 @@ export default function AddMovie() {
       return;
     }
 
-
-
-    if ( !(Rating <= 5 ))  {
+    if (!(Rating <= 5)) {
       setError("Enter rating between 0 - 5 ");
       return;
     }
@@ -44,7 +42,7 @@ export default function AddMovie() {
     const newMovie = {
       title,
       genre,
-      director,
+      poster,
       releaseDate,
       languages,
       runtime,
@@ -58,7 +56,7 @@ export default function AddMovie() {
         // Clear input fields after successful submission
         setTitle("");
         setGenre("");
-        setDirector("");
+        setPoster("");
         setReleaseDate("");
         setLanguages("");
         setRuntime("");
@@ -119,22 +117,22 @@ export default function AddMovie() {
         </div>
 
         <div className="mb-3">
-          <label htmlFor="director" className="c2">
-          Image Link 1
+          <label htmlFor="poster" className="c2">
+          Poster Image Link
           </label>
           <input
             type="text"
             className="form-control"
-            id="director"
+            id="poster"
             onChange={(e) => {
-              setDirector(e.target.value);
+              setPoster(e.target.value);
             }}
-            value={director}
+            value={poster}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="releasedate" className="c2">
-          Image Link 2
+          Release Date
           </label>
           <input
             type="text"
@@ -150,7 +148,7 @@ export default function AddMovie() {
 
         <div className="mb-3">
           <label htmlFor="languages" className="c2">
-          Trailer Link
+          Languages
           </label>
 
           <input

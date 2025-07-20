@@ -32,18 +32,22 @@ const PrivateCusScreen = () => {
   }, [searchQuery, loadedPrivateScreens]);
 
   return (
-    <div>
+    <div className="privcus-main-bg">
       <Header />
-      <div className="priv-search-container">
-        <input
-          type="text"
-          placeholder="Search by Name"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="priv-search-input"
-        />
+      <div className="privcus-content">
+        <div className="privcus-searchbar-wrap">
+          <input
+            type="text"
+            placeholder="Search by Name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="privcus-search-input"
+          />
+        </div>
+        <div className="privcus-list-wrap">
+          <UservScreenList items={filteredPrivateScreens} />
+        </div>
       </div>
-      <UservScreenList items={filteredPrivateScreens} />
     </div>
   );
 };

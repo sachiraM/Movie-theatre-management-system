@@ -106,36 +106,48 @@ export default function AllMovies() {
 
         {/* Render the table using autoTable */}
         <table border="1" className="tb-shehan">
-          <tr>
-            <th>Title</th>
-            <th>Genre</th>
-            <th>Director</th>
-            <th>Release Date</th>
-            <th>Languages</th>
-            <th>Runtime</th>
-            <th>Rating</th>
-            <th></th>
-            <th></th>
-          </tr>
-          {filteredMovies.map((i) => {
-            return (
-              <tr key={i._id}>
-                <td>{i.title}</td>
-                <td>{i.genre}</td>
-                <td>{i.director}</td>
-                <td>{i.releaseDate}</td>
-                <td>{i.languages}</td>
-                <td>{i.runtime}</td>
-                <td>{i.Rating}</td>
-                <td>
-                  <button className="button5" onClick={() => onDeleteClick(i._id)}>
-                    Delete
-                  </button>
-                </td>
-                <td><a href={'/updateMovie/' + i._id}><button className="button4">Update</button></a></td>
-              </tr>
-            );
-          })}
+          <thead>
+            <tr>
+              <th>Poster</th>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Release Date</th>
+              <th>Languages</th>
+              <th>Runtime</th>
+              <th>Rating</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredMovies.map((i) => {
+              return (
+                <tr key={i._id} style={{ cursor: 'pointer' }} onClick={() => window.location.href = '/updateMovie/' + i._id}>
+                  <td>
+                    {i.poster ? (
+                      <img src={i.poster} alt={i.title} style={{ width: '60px', height: '90px', objectFit: 'cover', borderRadius: '6px' }} />
+                    ) : (
+                      <span>No Image</span>
+                    )}
+                  </td>
+                  <td>{i.title}</td>
+                  <td>{i.genre}</td>
+                  <td>{i.releaseDate}</td>
+                  <td>{i.languages}</td>
+                  <td>{i.runtime}</td>
+                  <td>{i.Rating}</td>
+                  <td onClick={e => e.stopPropagation()}>
+                    <button className="button5" onClick={() => onDeleteClick(i._id)}>
+                      Delete
+                    </button>
+                  </td>
+                  <td onClick={e => e.stopPropagation()}>
+                    <a href={'/updateMovie/' + i._id}><button className="button4">Update</button></a>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
         </table>
 
         <button
