@@ -1,20 +1,72 @@
 .MainLayout {
+    min-height: 100vh;
     height: 100%;
     width: 100%;
+    background: #f7f8fa;
 }
 
 .HeaderTitle {
     color: white;
     font-size: 22px;
     text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .HeaderImg{
     width: 40px;
     height: 40px;
     animation: rotate 10s linear infinite;
-  }
-  .Icon {
+    display: block;
+    margin: 0 auto;
+}
+
+.Icon {
     width: 60px;
     height: 60px;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive header row */
+@media (max-width: 700px) {
+    .HeaderTitle {
+        font-size: 16px;
+        padding: 0 2px;
+    }
+    .Icon {
+        width: 40px;
+        height: 40px;
+    }
+    .HeaderImg {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* Responsive layout for sidebar/content */
+@media (max-width: 900px) {
+    .MainLayout .ant-layout-sider {
+        min-width: 60px !important;
+        max-width: 60px !important;
+        width: 60px !important;
+    }
+    .MainLayout .ant-layout-content {
+        padding: 8px 2px;
+    }
+}
+
+@media (max-width: 600px) {
+    .MainLayout .ant-layout-header {
+        padding: 0 2px !important;
+        min-height: 48px !important;
+    }
+    .HeaderTitle {
+        font-size: 13px;
+    }
+}

@@ -170,3 +170,87 @@ button {
   margin-right: 250px;
   font-size: 20px;
 }
+
+@media (max-width: 1100px) {
+  .button-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+@media (max-width: 900px) {
+  .button-container {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 10px 0;
+  }
+  .seat-button {
+    margin: 10px;
+    width: 60px;
+    height: 44px;
+    font-size: 13px;
+    padding: 7px 10px;
+  }
+  .screen-img {
+    max-width: 95vw;
+  }
+  .filmm {
+    font-size: 22px;
+  }
+  .the1, .the2 {
+    font-size: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .sel-price {
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .sticky-div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  .filmm {
+    font-size: 16px;
+    margin: 2px 0;
+  }
+  .the1, .the2 {
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .button-container {
+    padding-left: 2px;
+    padding-right: 2px;
+    margin: 5px 0;
+  }
+  .seat-button {
+    margin: 5px;
+    width: 40px;
+    height: 30px;
+    font-size: 10px;
+    padding: 4px 4px;
+  }
+  .screen-img {
+    max-width: 98vw;
+  }
+  .sel-price {
+    font-size: 12px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 2px;
+  }
+  .d-icon {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-right: 0;
+    padding-left: 2px;
+  }
+}

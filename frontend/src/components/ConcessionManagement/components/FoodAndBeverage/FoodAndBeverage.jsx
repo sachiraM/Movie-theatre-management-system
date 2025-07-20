@@ -87,52 +87,61 @@ export default function FoodAndBeverage({ prop = 'default value' }) {
   };
 
   return (
-    <div className="FoodAndBeverage">
-      <Tabs
-        type="card"
-        items={items}
-        tabBarExtraContent={
-          <Button
-            type="primary"
-            shape="round"
-            size="large"
-            icon={<ArrowRightOutlined />}
-            onClick={handleContinue}
-          >
-            continue
-          </Button>
-        }
-      />
+    <div className="FoodAndBeverage" style={{ minHeight: '100vh', background: '#f7f8fa', padding: '32px 0' }}>
+      {contextHolder}
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
+        <Tabs
+          type="card"
+          items={items}
+          tabBarExtraContent={
+            <Button
+              type="primary"
+              shape="round"
+              size="large"
+              icon={<ArrowRightOutlined />}
+              onClick={handleContinue}
+              style={{ marginLeft: 8 }}
+            >
+              continue
+            </Button>
+          }
+          tabBarStyle={{ marginBottom: 24 }}
+        />
+      </div>
     </div>
   );
 }
 
 function FoodAndBeverageItem({ item, handleAddToCart }) {
-  const [q, setQ] = useState(0);
+  const [q, setQ] = useState(1);
 
-  const handleQtyChange = (q) => {
-    setQ(q);
-  }
+  const handleQtyChange = (val) => {
+    setQ(val);
+  };
 
   return (
     <Card
-      style={{ width: 300 }}
+      style={{ width: 300, minHeight: 420, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 2px 12px rgba(0,0,0,0.07)' }}
       cover={
-        <img
-          alt="example"
-          src={item.P_image}
-        />
+        <div style={{ height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff', borderRadius: '8px 8px 0 0', overflow: 'hidden' }}>
+          <img
+            alt={item.P_name}
+            src={item.P_image}
+            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+          />
+        </div>
       }
       actions={[
-        <InputNumber addonBefore="Qty" value={q} max={20} style={{ paddingLeft: 30 }} onChange={handleQtyChange} />,
-        <Button type="primary" shape="round" icon={<ShoppingCartOutlined />} onClick={() => handleAddToCart(item)}>
+        <InputNumber addonBefore="Qty" min={1} value={q} max={20} style={{ width: 120 }} onChange={handleQtyChange} />,
+        <Button type="primary" shape="round" icon={<ShoppingCartOutlined />} onClick={() => handleAddToCart({ ...item, qty: q })}>
           Add
         </Button>
       ]}
+      bodyStyle={{ padding: 18, display: 'flex', flexDirection: 'column', flex: 1 }}
     >
       <Card.Meta
-        title={`${item.P_name} - Rs. ${item.P_price}`}
-        description={item.P_description}
+        title={<span style={{ fontWeight: 600, fontSize: 18 }}>{item.P_name} <span style={{ color: '#1890ff', fontWeight: 400, fontSize: 16 }}>- Rs. {item.P_price}</span></span>}
+        description={<span style={{ color: '#555', fontSize: 15 }}>{item.P_description}</span>}
       />
     </Card>
   );

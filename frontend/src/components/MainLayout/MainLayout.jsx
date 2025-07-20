@@ -82,7 +82,7 @@ export default function MainLayout() {
     });
     return title;
   }
-  return <Layout className="MainLayout">
+  return <Layout className="MainLayout" style={{ minHeight: '100vh', overflow: 'hidden' }}>
     <Layout.Header>
       <Row>
         <Col flex="60px">
@@ -96,7 +96,6 @@ export default function MainLayout() {
             </div>
           </div>
         </Col>
-
         <Col flex="auto" className="HeaderTitle">{findTitle(items, location.pathname) || 'Manager Dashboard'}</Col>
         <Col flex="40px">
           <Link to="/">
@@ -105,8 +104,8 @@ export default function MainLayout() {
         </Col>
       </Row>
     </Layout.Header>
-    <Layout>
-      <Layout.Sider width={250} trigger={null} collapsible collapsed={collapsed}>
+    <Layout style={{ minHeight: 'calc(100vh - 64px)', overflow: 'hidden' }}>
+      <Layout.Sider width={250} trigger={null} collapsible collapsed={collapsed} style={{ overflow: 'hidden' }}>
         <Menu theme="dark" >
           <Menu.Item onClick={(e) => { setCollapsed(!collapsed) }} icon={<MenuOutlined style={{ float: 'right', marginTop: 14 }} />} style={{ backgroundColor: 'transparent' }}></Menu.Item>
         </Menu>
@@ -125,7 +124,7 @@ export default function MainLayout() {
           onClick={handleMenuClick}
         />
       </Layout.Sider>
-      <Layout.Content>
+      <Layout.Content style={{ overflow: 'hidden', minHeight: 'calc(100vh - 64px)' }}>
         <Outlet />
       </Layout.Content>
     </Layout>
