@@ -5,11 +5,12 @@ import './CSS/Home.css';
 import './myScript';
 import Header from "../../shared/HomeHeader";
 import { Link } from "react-router-dom";
-
-
+import { LinkedinFilled, FacebookFilled, InstagramFilled, TwitterSquareFilled } from '@ant-design/icons';
 
 export default function HomeMain() {
   const [movies, setMovies] = useState([]);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -20,136 +21,136 @@ export default function HomeMain() {
         console.error("Error fetching movies:", error);
       }
     }
-
     fetchMovies();
   }, []);
 
+  // Slideshow logic
+  useEffect(() => {
+    if (movies.length < 2) return;
+    const interval = setInterval(() => {
+      setAnimating(true);
+      setTimeout(() => {
+        setSlideIndex((prev) => (prev + 1) % Math.min(5, movies.length));
+        setAnimating(false);
+      }, 400); // match animation duration
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [movies]);
+
+  const getPoster = (movie) => movie.director || "https://m.media-amazon.com/images/M/MV5BYzEwZjczOTktYzU1OS00YjJlLTgyY2UtNWEzODBlN2RjZDEwXkEyXkFqcGc@._V1_QL75_UX380_CR0,20,380,562_.jpg";
+
+  // Only use the first 5 movies for the slideshow
+  const heroMovies = movies.slice(0, 5);
+  const currentMovie = heroMovies[slideIndex] || {};
+  const bgPoster = getPoster(currentMovie);
+
   return (
-    <div>     
-    <Header/>
+    <div className="home-main-container">
+      <Header />
+      {/* Hero Slideshow Section */}
+      <section
+        className="hero-section hero-slideshow-section"
+        style={{
+          backgroundImage: `url(${bgPoster})`,
+        }}
+      >
+        <div className={`hero-content hero-slide-anim${animating ? ' animating' : ''}`}>
+          {currentMovie && (
+            <>
+              <img
+                className="hero-poster"
+                src={bgPoster}
+                alt={currentMovie.title}
+              />
+              <div className="hero-info">
+                <h1>{currentMovie.title}</h1>
+                <p>{currentMovie.Rating?.slice(0, 120) || "No description available."}</p>
+                <Link to={`/details/${currentMovie._id}`} className="hero-btn">View Details</Link>
+                <div className="hero-slideshow-controls">
+                  {heroMovies.map((_, idx) => (
+                    <span
+                      key={idx}
+                      className={`hero-dot${slideIndex === idx ? ' active' : ''}`}
+                      onClick={() => setSlideIndex(idx)}
+                    ></span>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
 
-
-    <Link to="/details">
-      <img
-        className="ima1"
-        src="https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2022/12/avatar-2.jpg?ssl=1&quality=80&w=f"
-        alt="Movie Poster"
-        width="95%"
-        height="100%"
-      />
-    </Link>
-   
-    <div className="fullContant">
-        <div className="cont">
-        {/* Display 5 movies in one row */}
-        <div className="movie-row">
-          {movies.slice(0, 5).map((movie, index) => (
-            <div className="contn1" key={index}>
+      {/* Popular Movies Section */}
+      <section className="movies-section">
+        <h2 className="section-title">Popular Movies</h2>
+        <div className="movies-grid">
+          {movies.slice(1, 6).map((movie) => (
+            <div className="movie-card" key={movie._id}>
               <Link to={`/details/${movie._id}`}>
-                  <img className="ima1" src={movie.director} alt="Movie Poster" width="95%" height="100%" />
-                </Link>
-
-              <h3 className="h3">{movie.title}</h3>
+                <img className="movie-poster" src={getPoster(movie)} alt={movie.title} />
+              </Link>
+              <h3 className="movie-title">{movie.title}</h3>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-        <div className="contn2">
-            <h2 className="hh" > Popular Movies</h2>
-        </div>
-
-        <div className="cont">
-        {/* Display 5 movies in one row */}
-        <div className="movie-row">
-          {movies.slice(0, 5).map((movie, index) => (
-            <div className="contn1" key={index}>
+      {/* Recommended Movies Section */}
+      <section className="movies-section recommended">
+        <h2 className="section-title">Recommended Movies</h2>
+        <div className="movies-grid">
+          {movies.slice(6, 11).map((movie) => (
+            <div className="movie-card" key={movie._id}>
               <Link to={`/details/${movie._id}`}>
-                  <img className="ima1" src={movie.director} alt="Movie Poster" width="95%" height="100%" />
-                </Link>
-
-              <h3 className="h3">{movie.title}</h3>
+                <img className="movie-poster" src={getPoster(movie)} alt={movie.title} />
+              </Link>
+              <h3 className="movie-title">{movie.title}</h3>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-        <div className="contn2">
-            <h2 className="hhh" > Recommended Movies</h2>
-        </div>
-
-        <div className="cont">
-        {/* Display 5 movies in one row */}
-        <div className="movie-row">
-          {movies.slice(0, 5).map((movie, index) => (
-            <div className="contn1" key={index}>
-              <Link to={`/details/${movie._id}`}>
-                  <img className="ima1" src={movie.director} alt="Movie Poster" width="95%" height="100%" />
-                </Link>
-
-              <h3 className="h3">{movie.title}</h3>
+      {/* Footer */}
+      <footer className="site-footer-modern">
+        <div className="footer-container">
+          <div className="footer-row">
+            <div className="footer-col about">
+              <h6>About Galaxy Cinema</h6>
+              <p>Galaxy Cinema revolutionizes your movie experience with seamless ticketing, concessions, and scheduling. Enjoy the magic of cinema with us!</p>
             </div>
-          ))}
-        </div>
-      </div>
-</div>
-    <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <h6>About</h6>
-            <p class="text-justify">Welcome to our Movie Theater Management System! We take pride in revolutionizing the movie-going experience through cutting-edge technology. Our platform seamlessly handles ticket bookings, concessions, and scheduling, ensuring a hassle-free and enjoyable time at the cinema. With user-friendly interfaces and robust backend support, we empower theater owners to streamline operations and engage audiences. Join us in shaping the future of cinematic entertainment, where efficiency meets the magic of the silver screen.</p>
+            <div className="footer-col links">
+              <h6>Quick Links</h6>
+              <ul>
+                <li><Link to="/about">About Us</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/privacy">Privacy Policy</Link></li>
+                <li><Link to="/movies">Movies</Link></li>
+              </ul>
+            </div>
+            <div className="footer-col contact">
+              <h6>Contact</h6>
+              <ul>
+                <li>Email: info@galaxycinema.com</li>
+                <li>Phone: +1 234 567 890</li>
+                <li>Location: 123 Movie Lane, Film City</li>
+              </ul>
+            </div>
+            <div className="footer-col social">
+              <h6>Follow Us</h6>
+              <div className="footer-social-icons">
+                <a href="#" aria-label="Facebook" className="footer-icon facebook"><FacebookFilled /></a>
+                <a href="#" aria-label="Twitter" className="footer-icon twitter"><TwitterSquareFilled /></a>
+                <a href="#" aria-label="Instagram" className="footer-icon instagram"><InstagramFilled /></a>
+                <a href="#" aria-label="LinkedIn" className="footer-icon linkedin"><LinkedinFilled /></a>
+              </div>
+            </div>
           </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Categories</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">Popular Movies</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">Popular Movies</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">Popular Movies</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Popular Movies</a></li>
-              <li><a href="http://scanfcode.com/category/android/">Popular Movies</a></li>
-              <li><a href="http://scanfcode.com/category/templates/">Popular Movies</a></li>
-            </ul>
-          </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Quick Links</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/about/">About Us</a></li>
-              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-              <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-              <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
-            </ul>
+          <div className="footer-bottom">
+            <p>© {new Date().getFullYear()} Galaxy Cinema. All rights reserved.</p>
           </div>
         </div>
-
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2023 All Rights Reserved by 
-         <a href="#"> Galaxy Cinema </a>.
-            </p>
-          </div>
-
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
-            </ul>
-          </div>
-        </div>
-      </div>
-  </footer>
-
-  
-
-
-</div>
-  
+      </footer>
+    </div>
   );
 }
