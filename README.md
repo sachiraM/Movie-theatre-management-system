@@ -6,16 +6,6 @@ A full-featured **MERN stack** application designed to automate and streamline o
 
 ---
 
-## 📑 Table of Contents
-
-* [About](#about)
-* [Quick Start](#quick-start)
-* [Features](#features)
-* [Technologies Used](#technologies-used)
-* [License](#license)
-
----
-
 ## 📖 About
 
 **Galaxy Cinema** is a comprehensive movie theatre management system developed by **Group ITP23\_WD\_B1\_06**. It empowers theatre staff and customers by automating key theatre functions. The system is designed to:
@@ -68,4 +58,7 @@ Run the project (launches backend & frontend in separate CMD terminals):
 
 ## 📄 License
 
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This project is licensed under the [MIT License](#Licence).
+
+---
+![Galaxy Cinema Preview](frontend/src/images/demo.jpg)
