@@ -37,7 +37,7 @@ export default function HomeMain() {
     return () => clearInterval(interval);
   }, [movies]);
 
-  const getPoster = (movie) => movie.director || "https://m.media-amazon.com/images/M/MV5BYzEwZjczOTktYzU1OS00YjJlLTgyY2UtNWEzODBlN2RjZDEwXkEyXkFqcGc@._V1_QL75_UX380_CR0,20,380,562_.jpg";
+  const getPoster = (movie) => movie.director || "https://miro.medium.com/v2/resize:fit:1400/0*745LhF-36g4CAerH";
 
   // Only use the first 5 movies for the slideshow
   const heroMovies = movies.slice(0, 5);
